@@ -2,29 +2,22 @@ pipeline {
     agent any
 
     stages {
-
         stage('Build Docker Image') {
             steps {
-                script {
-                    docker.build("comisiones-app")
-                }
+                sh 'docker build -t comisiones-app .'
             }
         }
 
         stage('Run Container') {
             steps {
-                script {
-                    docker.image("comisiones-app").inside {
-                        sh 'python script_comisiones.py'
-                    }
-                }
+                sh 'docker run --rm comisiones-app'
             }
         }
     }
 
     post {
         success {
-            echo 'Pipeline ejecutado exitosamente'
+            echo 'Pipeline ejecutado correctamente'
         }
         failure {
             echo 'Pipeline falló'
