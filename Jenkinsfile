@@ -11,7 +11,7 @@ pipeline {
 
         stage('Run Container') {
             steps {
-                sh 'docker run --rm -v "$PWD":/app comisiones-app'
+                sh 'docker run --rm -v "$PWD/app":/app comisiones-app'
             }
         }
     }
